@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  # MySQL
+  db:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: todo_app
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+    - ./config/my.cnf:/etc/mysql/conf.d/my.cnf
+    - ./init:/docker-entrypoint-initdb.d
+    ports:
+    - 3306:3306
